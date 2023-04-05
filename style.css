@@ -1,0 +1,27 @@
+.heading{
+    width: 100%;
+    text-align: left;
+}
+.heading h3{
+    display:inline;
+}
+.heading button{
+    float: right;
+    border:1px solid whitesmoke
+}
+
+.big_image{
+    width: 100%;
+}
+
+#start ,#status{
+    font-size: 25px;
+}
+.footer{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: orangered;
+    line-height: 2;
+    color: whitesmoke;
+}
