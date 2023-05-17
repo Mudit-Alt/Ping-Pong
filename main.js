@@ -20,16 +20,41 @@ var ball = {
     dx:3,
     dy:3
 }
+wristX = ""
+wristY = ""
+wristScore = 0
 
 function setup(){
   var canvas =  createCanvas(700,600);
+  canvas.parent('canvas')
+  video = createCapture(VIDEO)
+  video.hide()
+  video.size(700,600)
+  poseNet = ml5.poseNet(video, modalLoaded)
+	poseNet.on('pose', gotPoses);
 }
 
+function gotPoses(results){
+  if(results.length > 0){
+    wristX = results[0].pose.rightWrist.x;
+    wristY = results[0].pose.rightWrist.y;
+    wristScore = results[0].pose.rightWrist.confidence;
+  }
+  console.log(results)
+}
+
+function modalLoaded(){
+  console.log("Modal Loaded !!!")
+}
 
 function draw(){
 
  background(0); 
-
+if (wristScore > 0) {  
+ fill("red")
+ stroke("red")
+ circle(wristX , wristY , 30)
+}
  fill("black");
  stroke("black");
  rect(680,0,20,700);
@@ -65,6 +90,8 @@ function draw(){
    
    //function move call which in very important
     move();
+
+    image(video, 0, 0, 700, 600)
 }
 
 
